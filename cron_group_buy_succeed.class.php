@@ -66,6 +66,7 @@ class cron_group_buy_succeed extends CronAbstract
 
             foreach ($act_id_list as $k => $v) {
                 $group_buy = $this->group_buy_info($v['act_id']);
+                $store_name = RC_DB::table('store_franchisee')->where('store_id', $group_buy['store_id'])->pluck('merchants_name');
 
                 if ($group_buy['total_order'] > 0) {
                     $order_id_list = RC_DB::table('order_info')
@@ -144,7 +145,7 @@ class cron_group_buy_succeed extends CronAbstract
                                 'event'  => 'sms_groupbuy_activity_succeed',
                                 'value'  => array(
                                     'user_name'  => $order['consignee'],
-                                    'store_name' => $_SESSION['store_name'],
+                                    'store_name' => $store_name,
                                     'goods_name' => $order['goods_name']
                                 )
                             );
@@ -156,11 +157,11 @@ class cron_group_buy_succeed extends CronAbstract
 
                             $groupbuy_data      = array(
                                 'title' => '团购活动成功结束',
-                                'body'  => '您在' . $_SESSION['store_name'] . '店铺参加的商品' . $order['goods_name'] . '的团购活动现已结束， 请尽快支付订单剩余余款，方便及时给您发货。',
+                                'body'  => '您在' . $store_name . '店铺参加的商品' . $order['goods_name'] . '的团购活动现已结束， 请尽快支付订单剩余余款，方便及时给您发货。',
                                 'data'  => array(
                                     'user_id'    => $order['user_id'],
                                     'user_name'  => $user_name,
-                                    'store_name' => $_SESSION['store_name'],
+                                    'store_name' => $store_name,
                                     'goods_name' => $order['goods_name'],
                                     'order_id'   => $order['order_id'],
                                 ),
@@ -220,7 +221,6 @@ class cron_group_buy_succeed extends CronAbstract
         /* 取得团购活动信息 */
         $group_buy_id = intval($group_buy_id);
         $group_buy    = RC_DB::table('goods_activity')
-            ->where('store_id', $_SESSION['store_id'])
             ->where('act_id', $group_buy_id)
             ->where('act_type', GAT_GROUP_BUY)
             ->select(RC_DB::raw('*, act_id as group_buy_id, act_desc as group_buy_desc, start_time as start_date, end_time as end_date'))
@@ -302,7 +302,7 @@ class cron_group_buy_succeed extends CronAbstract
     {
         $group_buy_id = intval($group_buy_id);
 
-        $group_buy_goods_id = RC_DB::table('goods_activity')->where('store_id', $_SESSION['store_id'])->where('act_id', $group_buy_id)->where('act_type', GAT_GROUP_BUY)->pluck('goods_id');
+        $group_buy_goods_id = RC_DB::table('goods_activity')->where('act_id', $group_buy_id)->where('act_type', GAT_GROUP_BUY)->pluck('goods_id');
 
         /* 取得总订单数和总商品数 */
         $stat = RC_DB::table('order_info as o')->leftJoin('order_goods as g', RC_DB::raw('o.order_id'), '=', RC_DB::raw('g.order_id'))
