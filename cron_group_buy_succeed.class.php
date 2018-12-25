@@ -49,8 +49,6 @@
  */
 defined('IN_ECJIA') or exit('No permission resources.');
 
-use Ecjia\App\Cron\CronAbstract;
-
 class cron_group_buy_succeed extends CronAbstract
 {
 
@@ -59,6 +57,9 @@ class cron_group_buy_succeed extends CronAbstract
      */
     public function run()
     {
+        RC_Loader::load_app_class('groupbuy', 'groupbuy_activity_succeed', false);
+
+        groupbuy_activity_succeed::init();
 
     }
 
