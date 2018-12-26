@@ -47,4 +47,6 @@
 
 return array(
     'cron_code' => 'cron_group_buy_succeed',
+
+    'default_time' => array('cron_expression' => '*/10 * * * * *', 'expression_alias' => 'everyTenMinutes'),
 );
