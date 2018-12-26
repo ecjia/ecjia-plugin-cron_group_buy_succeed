@@ -73,7 +73,7 @@ class plugin_cron_group_buy_succeed {
 
 Ecjia_PluginManager::extend('cron_group_buy_succeed', function() {
     require_once RC_Plugin::plugin_dir_path(__FILE__) . 'cron_group_buy_succeed.class.php';
-    return new cron_order_auto_refuse();
+    return new cron_group_buy_succeed();
 });
 
 RC_Plugin::register_activation_hook(__FILE__, array('plugin_cron_group_buy_succeed', 'install'));
