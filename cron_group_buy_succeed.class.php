@@ -59,9 +59,9 @@ class cron_group_buy_succeed extends CronAbstract
      */
     public function run()
     {
-        RC_Loader::load_app_class('groupbuy_activity_succeed', 'groupbuy', false);
+        $result = (new Ecjia\App\Groupbuy\GroupbuyActivitySucceed)->runCronJob();
 
-        groupbuy_activity_succeed::init();
+        return $result;
     }
 
     /**
