@@ -52,6 +52,7 @@ Author: ECJIA TEAM
 Version: 1.30.0
 Author URI: http://www.ecjia.com/
 Plugin App: cron
+Text Domain: cron_group_buy_succeed
 */
 defined('IN_ECJIA') or exit('No permission resources.');
 class plugin_cron_group_buy_succeed {
