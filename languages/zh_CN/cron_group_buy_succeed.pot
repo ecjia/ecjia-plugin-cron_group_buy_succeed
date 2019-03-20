@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the 团购活动成功自动发送短信 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: 团购活动成功自动发送短信 1.25.0\n"
+"Project-Id-Version: 团购活动成功自动发送短信 1.30.0\n"
 "Report-Msgid-Bugs-To: https://www.ecjia.com/support/plugin/\n"
-"POT-Creation-Date: 2019-03-18 08:24:50+00:00\n"
+"POT-Creation-Date: 2019-03-20 09:19:26+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
